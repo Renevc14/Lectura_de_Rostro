@@ -5,7 +5,7 @@ import mediapipe as mp
 
 # Declaramos la deteccion de rostros
 detros = mp.solutions.face_detection
-rostros = detros.FaceDetection(min_detection_confidence= 0.8, model_selection=0)
+rostros = detros.FaceDetection(min_detection_confidence= 0.95, model_selection=0)
 # Dibujo
 dibujorostro = mp.solutions.drawing_utils
 
@@ -126,12 +126,19 @@ while True:
 
             # Mostramos info
             cv2.putText(frame, str(gen), (65, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2)
-            cv2.putText(frame, str(edad), (75, 90), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2)
+            if 14 <= edad <= 20:
+                cv2.putText(frame, "Adolescente", (75, 90), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2)
+            elif 21 <= edad <= 35:
+                cv2.putText(frame, "Adulto Joven", (75, 90), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2)
+            elif 36 <= edad <= 55:
+                cv2.putText(frame, "Adulto", (75, 90), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2)
+            else:
+                cv2.putText(frame, "Adulto Mayor", (75, 90), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2)
             cv2.putText(frame, str(emociones), (75, 135), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2)
             cv2.putText(frame, str(race), (75, 180), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2)
 
     # Mostramos los fotogramas
-    cv2.imshow(" Deteccion de Edad ", frame)
+    cv2.imshow(" Deteccion de Caracteristicas ", frame)
 
     # Leemos el teclado
     t = cv2.waitKey(5)
